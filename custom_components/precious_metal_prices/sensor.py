@@ -66,9 +66,6 @@ SENSORS = [
     {"name": "Silver CHF/toz", "unit": "CHF", "icon": "mdi:currency-fra"},
     {"name": "Silver CHF/g", "unit": "CHF", "icon": "mdi:currency-fra"},
     {"name": "Silver CHF/kg", "unit": "CHF", "icon": "mdi:currency-fra"},
-    {"name": "Platinum CHF/toz", "unit": "CHF", "icon": "mdi:currency-fra"},
-    {"name": "Platinum CHF/g", "unit": "CHF", "icon": "mdi:currency-fra"},
-    {"name": "Platinum CHF/kg", "unit": "CHF", "icon": "mdi:currency-fra"},
     # Platinum
     {"name": "Platinum USD/toz", "unit": "USD", "icon": "mdi:currency-usd"},
     {"name": "Platinum USD/g", "unit": "USD", "icon": "mdi:currency-usd"},
@@ -79,6 +76,9 @@ SENSORS = [
     {"name": "Platinum GBP/toz", "unit": "GBP", "icon": "mdi:currency-gbp"},
     {"name": "Platinum GBP/g", "unit": "GBP", "icon": "mdi:currency-gbp"},
     {"name": "Platinum GBP/kg", "unit": "GBP", "icon": "mdi:currency-gbp"},
+    {"name": "Platinum CHF/toz", "unit": "CHF", "icon": "mdi:currency-fra"},
+    {"name": "Platinum CHF/g", "unit": "CHF", "icon": "mdi:currency-fra"},
+    {"name": "Platinum CHF/kg", "unit": "CHF", "icon": "mdi:currency-fra"},
     # Palladium
     {"name": "Palladium USD/toz", "unit": "USD", "icon": "mdi:currency-usd"},
     {"name": "Palladium USD/g", "unit": "USD", "icon": "mdi:currency-usd"},
@@ -250,11 +250,14 @@ class PreciousMetalSensor(CoordinatorEntity[MetalPriceCoordinator], SensorEntity
         self._attr_unique_id = name.lower().replace(" ", "_")
         self._attr_native_value = None
 
-    # check if we have value or put a 0.0 as default.
-    def _get_rates(self) -> tuple[float, float]:
+    # check if we have value or put a None as default.
+    def _get_rates(self) -> tuple[float | None, float | None]:
         data = self._currency_coordinator.data or {}
-        return float(data.get("gbp_rate", 0.0)), float(data.get("chf_rate", 0.0))
-
+        gbp = data.get("gbp_rate")
+        chf = data.get("chf_rate")
+        return (float(gbp) if gbp is not None else None,
+                float(chf) if chf is not None else None)
+        
     def _update_from_coordinator_data(self) -> None:
         """Derive this sensor's value from coordinators data."""
         data = self.coordinator.data
