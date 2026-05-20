@@ -250,11 +250,14 @@ class PreciousMetalSensor(CoordinatorEntity[MetalPriceCoordinator], SensorEntity
         self._attr_unique_id = name.lower().replace(" ", "_")
         self._attr_native_value = None
 
-    # check if we have value or put a 0.0 as default.
-    def _get_rates(self) -> tuple[float, float]:
+    # check if we have value or put a None as default.
+    def _get_rates(self) -> tuple[float | None, float | None]:
         data = self._currency_coordinator.data or {}
-        return float(data.get("gbp_rate", 0.0)), float(data.get("chf_rate", 0.0))
-
+        gbp = data.get("gbp_rate")
+        chf = data.get("chf_rate")
+        return (float(gbp) if gbp is not None else None,
+                float(chf) if chf is not None else None)
+        
     def _update_from_coordinator_data(self) -> None:
         """Derive this sensor's value from coordinators data."""
         data = self.coordinator.data
