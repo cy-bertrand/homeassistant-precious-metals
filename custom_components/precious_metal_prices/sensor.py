@@ -66,9 +66,6 @@ SENSORS = [
     {"name": "Silver CHF/toz", "unit": "CHF", "icon": "mdi:currency-fra"},
     {"name": "Silver CHF/g", "unit": "CHF", "icon": "mdi:currency-fra"},
     {"name": "Silver CHF/kg", "unit": "CHF", "icon": "mdi:currency-fra"},
-    {"name": "Platinum CHF/toz", "unit": "CHF", "icon": "mdi:currency-fra"},
-    {"name": "Platinum CHF/g", "unit": "CHF", "icon": "mdi:currency-fra"},
-    {"name": "Platinum CHF/kg", "unit": "CHF", "icon": "mdi:currency-fra"},
     # Platinum
     {"name": "Platinum USD/toz", "unit": "USD", "icon": "mdi:currency-usd"},
     {"name": "Platinum USD/g", "unit": "USD", "icon": "mdi:currency-usd"},
@@ -79,6 +76,9 @@ SENSORS = [
     {"name": "Platinum GBP/toz", "unit": "GBP", "icon": "mdi:currency-gbp"},
     {"name": "Platinum GBP/g", "unit": "GBP", "icon": "mdi:currency-gbp"},
     {"name": "Platinum GBP/kg", "unit": "GBP", "icon": "mdi:currency-gbp"},
+    {"name": "Platinum CHF/toz", "unit": "CHF", "icon": "mdi:currency-fra"},
+    {"name": "Platinum CHF/g", "unit": "CHF", "icon": "mdi:currency-fra"},
+    {"name": "Platinum CHF/kg", "unit": "CHF", "icon": "mdi:currency-fra"},
     # Palladium
     {"name": "Palladium USD/toz", "unit": "USD", "icon": "mdi:currency-usd"},
     {"name": "Palladium USD/g", "unit": "USD", "icon": "mdi:currency-usd"},
